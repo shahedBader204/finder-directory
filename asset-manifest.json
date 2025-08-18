@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/finder-directory/static/css/main.f855e6bc.css",
+    "main.js": "/finder-directory/static/js/main.8a51cea9.js",
+    "static/js/453.e4c67138.chunk.js": "/finder-directory/static/js/453.e4c67138.chunk.js",
+    "static/media/logo.svg": "/finder-directory/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/finder-directory/index.html",
+    "main.f855e6bc.css.map": "/finder-directory/static/css/main.f855e6bc.css.map",
+    "main.8a51cea9.js.map": "/finder-directory/static/js/main.8a51cea9.js.map",
+    "453.e4c67138.chunk.js.map": "/finder-directory/static/js/453.e4c67138.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.8a51cea9.js"
+  ]
+}
