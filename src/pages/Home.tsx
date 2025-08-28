@@ -1,8 +1,10 @@
+import { Button } from "antd";
 
-import React from 'react';
-
-const Home: React.FC = () => {
-  return <h1>Home Page</h1>;
-};
-
-export default Home;
+export default function Home() {
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Welcome Home</h1>
+      <Button type="primary">Click me</Button>
+    </div>
+  );
+}
