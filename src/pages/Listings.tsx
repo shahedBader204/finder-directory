@@ -1,12 +1,27 @@
+import { db } from "../firebase/config";
+import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
-import React from 'react';
+export default function Listings() {
+  const [listings, setListings] = useState<any[]>([]);
 
-const Listings: React.FC = () => {
+  useEffect(() => {
+    const fetchListings = async () => {
+      const querySnapshot = await getDocs(collection(db, "listings"));
+      setListings(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    };
+    fetchListings();
+  }, []);
+
   return (
-    <div>
-      <h2>All Listings</h2>
+    <div style={{ padding: 20 }}>
+      <h1>Listings</h1>
+      {listings.map(listing => (
+        <div key={listing.id}>
+          <h3>{listing.title}</h3>
+          <p>{listing.description}</p>
+        </div>
+      ))}
     </div>
   );
-};
-
-export default Listings;
+}

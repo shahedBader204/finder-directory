@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
-import { auth } from '../../firebase/config'; // <-- هنا استورد auth فقط
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { Button, Input, Form } from "antd";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const onFinish = async (values: any) => {
+    setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert('Login successful!');
-    } catch (error) {
-      console.error(error);
-      alert('Error logging in');
+      await login(values.email, values.password);
+      alert("Login successful!");
+    } catch (err) {
+      alert("Error logging in");
     }
+    setLoading(false);
   };
 
   return (
-    <div>
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button onClick={handleLogin}>Login</button>
-    </div>
+    <Form onFinish={onFinish} style={{ maxWidth: 300, margin: "auto", paddingTop: 50 }}>
+      <Form.Item name="email" rules={[{ required: true, message: "Enter email" }]}>
+        <Input placeholder="Email" />
+      </Form.Item>
+      <Form.Item name="password" rules={[{ required: true, message: "Enter password" }]}>
+        <Input.Password placeholder="Password" />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit" loading={loading}>
+          Login
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }
