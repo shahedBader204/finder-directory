@@ -1,27 +1,47 @@
-import { db } from "../firebase/config";
-import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Card, Spin, Row, Col } from 'antd';
+import { getListings } from '../services/listingService';
 
-export default function Listings() {
-  const [listings, setListings] = useState<any[]>([]);
+const Listings: React.FC = () => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['listings'],
+    queryFn: getListings,
+  });
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      const querySnapshot = await getDocs(collection(db, "listings"));
-      setListings(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    };
-    fetchListings();
-  }, []);
+  if (isLoading)
+    return (
+      <Spin size="large" style={{ display: 'block', margin: '40px auto' }} />
+    );
+  if (isError)
+    return (
+      <p style={{ color: 'red', textAlign: 'center' }}> Error loading data</p>
+    );
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Listings</h1>
-      {listings.map(listing => (
-        <div key={listing.id}>
-          <h3>{listing.title}</h3>
-          <p>{listing.description}</p>
-        </div>
-      ))}
-    </div>
+    <Row gutter={[20, 20]} style={{ padding: 20 }}>
+      {data && data.length > 0 ? (
+        data.map((listing) => (
+          <Col key={listing.id} xs={24} sm={12} md={8} lg={6}>
+            <Card
+              hoverable
+              cover={
+                listing.imageUrl && (
+                  <img alt={listing.title} src={listing.imageUrl} />
+                )
+              }
+              title={listing.title}
+            >
+              <p>{listing.description}</p>
+              <small>Created by: {listing.userId}</small>
+            </Card>
+          </Col>
+        ))
+      ) : (
+        <p style={{ textAlign: 'center' }}>No data currently available</p>
+      )}
+    </Row>
   );
-}
+};
+
+export default Listings;

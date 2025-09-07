@@ -1,12 +1,11 @@
+import { useParams } from 'react-router-dom';
 
-import React from 'react';
+type ListingProps = {};
 
-const SingleListing: React.FC = () => {
-  return (
-    <div>
-      <h2>Listing Details</h2>
-    </div>
-  );
+const SingleListing = (props: ListingProps) => {
+  const { id } = useParams<{ id: string }>();
+
+  return <div>Listing ID: {id}</div>;
 };
 
 export default SingleListing;

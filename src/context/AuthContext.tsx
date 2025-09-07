@@ -1,12 +1,18 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { auth } from "../firebase/config";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
+import { auth } from '../firebase/config';
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  User
-} from "firebase/auth";
+  User,
+} from 'firebase/auth';
 
 interface AuthContextProps {
   user: User | null;
@@ -15,8 +21,9 @@ interface AuthContextProps {
   logout: () => Promise<void>;
 }
 
-// ✅ تصدير AuthContext إذا احتجنا
-export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export const AuthContext = createContext<AuthContextProps | undefined>(
+  undefined,
+);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -45,9 +52,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// ✅ export hook هنا مباشرة بدل useAuth.ts المنفصل
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 };
