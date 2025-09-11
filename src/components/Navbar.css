@@ -1,0 +1,63 @@
+.navbar-desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1296px;
+  height: 56px;
+  padding: 10px 0;
+  background-color: #ffffff;
+  margin: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #111827;
+}
+
+.nav-links .nav-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #333d4c;
+  padding: 8px 18px;
+  height: 40px;
+}
+
+.button-group .add-property-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+  height: 40px;
+  width: 120px;
+  background-color: #b71c1c !important; 
+  border-color: #b71c1c !important;
+}
+
+.button-group .add-property-btn:hover,
+.button-group .add-property-btn:focus {
+  background-color: #7f0000 !important; 
+  border-color: #7f0000 !important;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 11px;
+}
